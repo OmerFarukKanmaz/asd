@@ -1,0 +1,24 @@
+create a seperate component for counterButton
+add reset function and resetButton
+add css to resetButton
+
+to make some common css rules define it under a button 
+
+button {
+    font-size: 20px;
+    background-color: #00ab25;
+    width: 150px;
+    margin: 10px;
+    color: black;
+    padding: 15px;
+    border-radius: 30px;
+    border-color: black;
+    border-width: 5px;
+}
+
+delete child states and reduce the function call
+we use arrow functions, similar to lambda fucntions in java
+
+<button className="counterButton"
+                    onClick={() => increment(by)}
+                >+{by}</button>
