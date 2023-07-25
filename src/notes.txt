@@ -22,3 +22,6 @@ we use arrow functions, similar to lambda fucntions in java
 <button className="counterButton"
                     onClick={() => increment(by)}
                 >+{by}</button>
+
+change the form to read only to input by adding state
+        setUsername(event.target.value)
