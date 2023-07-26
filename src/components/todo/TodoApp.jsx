@@ -1,18 +1,21 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useNavigate, useParams, Link } from 'react-router-dom'
 import './TodoApp.css'
 
 export default function TodoApp() {
     return (
         <div className="TodoApp">
             <BrowserRouter>
+                <HeaderComponent />
                 <Routes>
                     <Route path='/' element={<LoginComponent />}></Route>
                     <Route path='/login' element={<LoginComponent />}></Route>
                     <Route path='/welcome/:username' element={<WelcomeComponent />}></Route>
                     <Route path='*' element={<ErrorComponent />}></Route>
                     <Route path='todos' element={<ListTodosComponent />}></Route>
+                    <Route path='logout' element={<LogoutComponent />}></Route>
                 </Routes>
+                <FooterComponent />
             </BrowserRouter>
         </div>
     )
@@ -81,7 +84,12 @@ function WelcomeComponent() {
     const { username } = useParams()
 
     return (
-        <div className="Welcome">Welcome {username}</div>
+        <div>
+            <div className="Welcome">Welcome {username}</div>
+            <div>
+                Your todos - <Link to="/todos">GO Here</Link>
+            </div>
+        </div>
 
     )
 }
@@ -97,22 +105,25 @@ function ErrorComponent() {
 }
 
 function ListTodosComponent() {
+    const today = new Date()
+    const TargetDate = new Date(today.getFullYear() + 12, today.getMonth(), today.getDay())
     const todos = [
-        { id: 1, description: 'Learn smt' },
-        { id: 2, description: 'do more based on that' },
-        { id: 3, description: 'never mistake' },
+        { id: 1, description: 'Learn smt', done: false, targetDate: TargetDate },
+        { id: 2, description: 'do more based on that', done: false, targetDate: TargetDate },
+        { id: 3, description: 'never mistake', done: false, targetDate: TargetDate },
     ]
 
-
     return (
-        <div className="ListTodosComponent">
+        <div className="container">
             <h1>List what to Do !</h1>
             <div>
-                <table>
+                <table className="table">
                     <thead>
                         <tr>
                             <td>id</td>
                             <td>description</td>
+                            <td>Is Done ?</td>
+                            <td>Target Date</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,6 +133,8 @@ function ListTodosComponent() {
                                     <tr key={todo.id}>
                                         <td>{todo.id}</td>
                                         <td>{todo.description}</td>
+                                        <td>{todo.done.toString()}</td>
+                                        <td>{todo.targetDate.toDateString()}</td>
                                     </tr>
                                 )
                             )
@@ -135,3 +148,50 @@ function ListTodosComponent() {
 
     )
 }
+
+function HeaderComponent() {
+    return (
+        <header className="border-bottom border-light border-5 mb-5 p-2">
+            <div className="container">
+                <div className="row">
+                    <nav className="navbar navbar-expand-lg">
+                        <a className="navbar-brand ms-2 fs-2 fw-bold text-black" href="https://www.in28minutes.com">google</a>
+                        <div className="collapse navbar-collapse">
+                            <ul className="navbar-nav">
+                                <li className="nav-item fs-5"><Link className="nav-link" to="/welcome/in28minutes">Home</Link></li>
+                                <li className="nav-item fs-5"><Link className="nav-link" to="/todos">Todos</Link></li>
+                            </ul>
+                        </div>
+                        <ul className="navbar-nav">
+                            <li className="nav-item fs-5"><Link className="nav-link" to="/login">Login</Link></li>
+                            <li className="nav-item fs-5"><Link className="nav-link" to="/logout">Logout</Link></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+    )
+}
+
+function FooterComponent() {
+    return (
+        <footer className="footer">
+            <div class="container">
+                Your Footer
+            </div>
+        </footer>
+
+    )
+}
+
+function LogoutComponent() {
+    return (
+        <div className="logout">
+            You re logged out. c ya
+        </div>
+
+    )
+}
+
+
