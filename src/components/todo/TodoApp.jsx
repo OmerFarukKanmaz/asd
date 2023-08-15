@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route, useNavigate, useParams, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route,} from 'react-router-dom'
 import './TodoApp.css'
-// import LogoutComponent from './LogoutComponent'
-// import HeaderComponent from './HeaderComponent'
-// import ErrorComponent from './Components/ErrorComponent'
-// import ListTodosComponent from './ListTodosComponent'
-// import LoginComponent from './LoginComponent'
-// import WelcomeComponent from './Components/WelcomeComponent'
+import LogoutComponent from './Components/LogoutComponent'
+import HeaderComponent from './Components/HeaderComponent'
+import ErrorComponent from './Components/ErrorComponent'
+import ListTodosComponent from './Components/ListTodosComponent'
+import LoginComponent from './Components/LoginComponent'
+import WelcomeComponent from './Components/WelcomeComponent'
+import FooterComponent from './Components/FooterComponent'
 
-import * as Components from './Components'
 
 export default function TodoApp() {
     return (
@@ -16,9 +15,9 @@ export default function TodoApp() {
             <BrowserRouter>
                 <HeaderComponent />
                 <Routes>
-                    <Route path='/' element={<Components.LoginComponent />}></Route>
-                    <Route path='/login' element={<Components.LoginComponent />}></Route>
-                    <Route path='/welcome/:username' element={<Components.WelcomeComponent />}></Route>
+                    <Route path='/' element={<LoginComponent />}></Route>
+                    <Route path='/login' element={<LoginComponent />}></Route>
+                    <Route path='/welcome/:username' element={<WelcomeComponent />}></Route>
                     <Route path='*' element={<ErrorComponent />}></Route>
                     <Route path='todos' element={<ListTodosComponent />}></Route>
                     <Route path='logout' element={<LogoutComponent />}></Route>
